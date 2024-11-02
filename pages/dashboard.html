@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poultry Farm Management - Dashboard</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <button id="menuToggle" class="menu-toggle" aria-label="Toggle Menu">
+        <span class="menu-icon">☰</span>
+    </button>
+
+    <div class="sidebar-overlay"></div>
+
+    <nav class="sidebar" id="sidebar" aria-hidden="true">
+        <div class="sidebar-header">
+            <h2>Poultry Farm</h2>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard.html">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="fowl.html">
+                    <span class="icon">🐔</span>
+                    Fowl Management
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="sales.html">
+                    <span class="icon">🥚</span>
+                    Egg Sales
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="mortality.html">
+                    <span class="icon">📋</span>
+                    Mortality Tracking
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reports.html">
+                    <span class="icon">📈</span>
+                    Reports
+                </a>
+            </li>
+            <li class="nav-item logout-item">
+                <a href="#" id="logoutBtn">
+                    <span class="icon">🚪</span>
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1>Dashboard</h1>
+        <div class="stats-grid">
+            <div class="stats-card">
+                <h3>Total Fowl</h3>
+                <div class="stats-value">--</div>
+                <div class="stats-change">Loading...</div>
+            </div>
+            
+            <div class="stats-card">
+                <h3>Today's Egg Sales</h3>
+                <div class="stats-value">--</div>
+                <div class="stats-change">Loading...</div>
+            </div>
+            
+            <div class="stats-card">
+                <h3>Monthly Revenue</h3>
+                <div class="stats-value">--</div>
+                <div class="stats-change">Loading...</div>
+            </div>
+            
+            <div class="stats-card">
+                <h3>Mortality Rate</h3>
+                <div class="stats-value">--</div>
+                <div class="stats-info">Last 30 days</div>
+            </div>
+        </div>
+
+        <section class="activity-section">
+            <div class="activity-header">
+                <h2>Recent Activity</h2>
+            </div>
+            <div class="activity-list">
+                <!-- Activities will be populated here -->
+            </div>
+            <div class="pagination">
+                <!-- Pagination controls will be added here -->
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Data Management</h2>
+            <div class="data-management-content">
+                <div class="storage-status">
+                    <div class="storage-info">
+                        <div class="storage-bar">
+                            <div class="storage-used" id="storageUsed"></div>
+                        </div>
+                        <span class="storage-text" id="storageText"></span>
+                    </div>
+                    <div class="last-backup-info" id="lastBackupInfo"></div>
+                </div>
+                
+                <div class="data-actions">
+                    <button id="backupBtn" class="btn btn-outline">
+                        <span class="icon">💾</span>
+                        <span class="btn-text">Backup Data</span>
+                    </button>
+                    <input type="file" id="restoreInput" accept=".json" style="display: none;">
+                    <button id="restoreBtn" class="btn btn-outline">
+                        <span class="icon">📂</span>
+                        <span class="btn-text">Restore Data</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html> 

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Poultry Farm</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/reports.css">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Poultry Farm</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard.html">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="fowl.html">
+                    <span class="icon">🐔</span>
+                    Fowl Management
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="sales.html">
+                    <span class="icon">💰</span>
+                    Egg Sales
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="mortality.html">
+                    <span class="icon">📋</span>
+                    Mortality Tracking
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="reports.html">
+                    <span class="icon">📈</span>
+                    Reports
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="btn btn-outline">
+                <span class="icon">🚪</span>
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle">☰</button>
+                <h1>Reports</h1>
+            </div>
+            <div class="header-right">
+                <button id="exportReportBtn" class="btn btn-primary">
+                    <span class="icon">📥</span> Export Report
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <!-- Report Filters -->
+            <div class="report-filters">
+                <div class="filter-group">
+                    <label for="reportType">Report Type</label>
+                    <select id="reportType">
+                        <option value="sales">Sales Report</option>
+                        <option value="mortality">Mortality Report</option>
+                        <option value="inventory">Inventory Report</option>
+                        <option value="performance">Performance Report</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="dateRange">Date Range</label>
+                    <select id="dateRange">
+                        <option value="7days">Last 7 Days</option>
+                        <option value="30days">Last 30 Days</option>
+                        <option value="90days">Last 90 Days</option>
+                        <option value="custom">Custom Range</option>
+                    </select>
+                </div>
+                <div class="filter-group custom-date-range" style="display: none;">
+                    <div class="date-inputs">
+                        <div>
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div>
+                            <label for="endDate">End Date</label>
+                            <input type="date" id="endDate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Report Content -->
+            <div class="report-content">
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <div class="chart-container">
+                        <h3>Revenue Trend</h3>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Mortality Rate</h3>
+                        <canvas id="mortalityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h3>Total Revenue</h3>
+                        <div class="metric-value" id="totalRevenue">GH₵ 0.00</div>
+                        <div class="metric-change positive">+0% from previous period</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Total Eggs Sold</h3>
+                        <div class="metric-value" id="totalEggs">0 dozens</div>
+                        <div class="metric-change positive">+0% from previous period</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Average Price/Dozen</h3>
+                        <div class="metric-value" id="avgPrice">GH₵ 0.00</div>
+                        <div class="metric-change negative">0% from previous period</div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Mortality Rate</h3>
+                        <div class="metric-value" id="mortalityRate">0%</div>
+                        <div class="metric-change positive">0% from previous period</div>
+                    </div>
+                </div>
+
+                <!-- Detailed Data Table -->
+                <div class="data-table-section">
+                    <div class="table-header">
+                        <h3>Detailed Report</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-outline" id="printTableBtn">
+                                <span class="icon">🖨️</span> Print
+                            </button>
+                            <button class="btn btn-outline" id="exportTableBtn">
+                                <span class="icon">📊</span> Export to Excel
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table id="reportTable" class="report-table">
+                            <!-- Table content will be dynamically populated -->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/reports.js"></script>
+    <script src="../js/utils.js"></script>
+
+    <!-- Custom Confirmation Dialog -->
+    <div id="confirmDialog" class="modal confirmation-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirmTitle">Confirm Action</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmCancel" class="btn btn-outline">Cancel</button>
+                <button id="confirmOk" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

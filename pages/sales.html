@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egg Sales - Poultry Farm</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sales.css">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Poultry Farm</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard.html">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="fowl.html">
+                    <span class="icon">🐔</span>
+                    Fowl Management
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="sales.html">
+                    <span class="icon">💰</span>
+                    Egg Sales
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="mortality.html">
+                    <span class="icon">📋</span>
+                    Mortality Tracking
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reports.html">
+                    <span class="icon">📈</span>
+                    Reports
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="btn btn-outline">
+                <span class="icon">🚪</span>
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle">☰</button>
+                <h1>Egg Sales</h1>
+            </div>
+            <div class="header-right">
+                <button id="printBtn" class="btn btn-outline">
+                    <span class="icon">🖨️</span>
+                    <span class="btn-text">Print</span>
+                </button>
+                <button id="downloadPdfBtn" class="btn btn-outline">
+                    <span class="icon">📥</span>
+                    <span class="btn-text">Download PDF</span>
+                </button>
+                <button id="addSaleBtn" class="btn btn-primary">
+                    <span class="icon">➕</span>
+                    <span class="btn-text">Record New Sale</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <!-- Sales Summary Cards -->
+            <div class="sales-summary">
+                <div class="summary-card">
+                    <h3>Today's Sales</h3>
+                    <div class="summary-value" id="todaySales">₦0.00</div>
+                    <div class="summary-subtext">0 dozens</div>
+                </div>
+                <div class="summary-card">
+                    <h3>This Week</h3>
+                    <div class="summary-value" id="weekSales">₦0.00</div>
+                    <div class="summary-subtext">0 dozens</div>
+                </div>
+                <div class="summary-card">
+                    <h3>This Month</h3>
+                    <div class="summary-value" id="monthSales">₦0.00</div>
+                    <div class="summary-subtext">0 dozens</div>
+                </div>
+            </div>
+
+            <!-- Sales List Section -->
+            <div class="sales-section">
+                <div class="sales-header">
+                    <h2>Recent Sales</h2>
+                    <div class="sales-filters">
+                        <input type="date" id="dateFilter" class="date-filter">
+                        <select id="sortFilter" class="sort-filter">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="highest">Highest Amount</option>
+                            <option value="lowest">Lowest Amount</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sales-table-container">
+                    <table class="sales-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Invoice #</th>
+                                <th>Customer</th>
+                                <th>Quantity (Dozens)</th>
+                                <th>Price/Dozen</th>
+                                <th>Total Amount</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salesTableBody">
+                            <!-- Sales records will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Sale Modal -->
+        <div id="saleModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Record New Sale</h2>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <form id="saleForm">
+                    <div class="form-group">
+                        <label for="customerName">Customer Name</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="quantity">Quantity (Dozens)</label>
+                            <input type="number" id="quantity" required min="1" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="pricePerDozen">Price per Dozen (GH₵)</label>
+                            <input type="number" id="pricePerDozen" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="saleDate">Sale Date</label>
+                        <input type="datetime-local" id="saleDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Payment Method</label>
+                        <select id="paymentMethod" required>
+                            <option value="cash">Cash</option>
+                            <option value="transfer">Bank Transfer</option>
+                            <option value="pos">POS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Sale</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Custom Confirmation Dialog -->
+    <div id="confirmDialog" class="modal confirmation-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirmTitle">Confirm Action</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmCancel" class="btn btn-outline">Cancel</button>
+                <button id="confirmOk" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this right after <main class="main-content"> -->
+    <div class="print-only">
+        <div class="print-header">
+            <h1>Poultry Farm Sales Report</h1>
+            <div class="company-info">
+                <p>Poultry Farm Management System</p>
+                <p>123 Farm Road, Agricultural District</p>
+                <p>Phone: +233 123 456 789 | Email: info@poultryfarm.com</p>
+            </div>
+        </div>
+
+        <div class="record-info">
+            <p><strong>Generated:</strong> <span id="printDate"></span></p>
+            <p><strong>Generated By:</strong> <span id="printUser"></span></p>
+        </div>
+
+        <div class="sales-records-table">
+            <!-- Table will be populated by JavaScript -->
+        </div>
+
+        <div class="print-footer">
+            <p>© 2024 Poultry Farm Management System</p>
+            <p>Powered by GenTech Solutions</p>
+        </div>
+    </div>
+
+    <!-- Add these before your other scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="../js/sales.js"></script>
+    <script src="../js/utils.js"></script>
+</body>
+</html> 

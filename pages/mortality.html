@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortality Tracking - Poultry Farm</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/mortality.css">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Poultry Farm</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard.html">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="fowl.html">
+                    <span class="icon">🐔</span>
+                    Fowl Management
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="sales.html">
+                    <span class="icon">💰</span>
+                    Egg Sales
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="mortality.html">
+                    <span class="icon">📋</span>
+                    Mortality Tracking
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reports.html">
+                    <span class="icon">📈</span>
+                    Reports
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="btn btn-outline">
+                <span class="icon">🚪</span>
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle">☰</button>
+                <h1>Mortality Tracking</h1>
+            </div>
+            <div class="header-right">
+                <button id="addMortalityBtn" class="btn btn-primary">
+                    <span class="icon">➕</span> Record Mortality
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <!-- Mortality Statistics -->
+            <div class="mortality-stats">
+                <div class="stat-card">
+                    <h3>Today's Mortality</h3>
+                    <div class="stat-value" id="todayMortality">0</div>
+                    <div class="stat-change">Birds</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Weekly Rate</h3>
+                    <div class="stat-value" id="weeklyRate">0%</div>
+                    <div class="stat-change">Last 7 days</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Monthly Total</h3>
+                    <div class="stat-value" id="monthlyTotal">0</div>
+                    <div class="stat-change">This month</div>
+                </div>
+            </div>
+
+            <!-- Mortality Records -->
+            <div class="mortality-section">
+                <div class="section-header">
+                    <h2>Mortality Records</h2>
+                    <div class="filter-controls">
+                        <input type="date" id="dateFilter" class="date-filter">
+                        <select id="batchFilter" class="batch-filter">
+                            <option value="">All Batches</option>
+                        </select>
+                        <select id="causeFilter" class="cause-filter">
+                            <option value="">All Causes</option>
+                            <option value="disease">Disease</option>
+                            <option value="injury">Injury</option>
+                            <option value="natural">Natural</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="mortality-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Batch ID</th>
+                                <th>Number of Birds</th>
+                                <th>Cause</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mortalityTableBody">
+                            <!-- Mortality records will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Mortality Modal -->
+        <div id="mortalityModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Record Mortality</h2>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <form id="mortalityForm">
+                    <div class="form-group">
+                        <label for="batchId">Batch ID</label>
+                        <select id="batchId" required>
+                            <!-- Batch options will be populated from fowl data -->
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="numberOfBirds">Number of Birds</label>
+                            <input type="number" id="numberOfBirds" required min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="mortalityDate">Date</label>
+                            <input type="date" id="mortalityDate" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cause">Cause of Death</label>
+                        <select id="cause" required>
+                            <option value="disease">Disease</option>
+                            <option value="injury">Injury</option>
+                            <option value="natural">Natural</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Additional Notes</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Record</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Custom Confirmation Dialog -->
+        <div id="confirmDialog" class="modal confirmation-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="confirmTitle">Confirm Action</h3>
+                </div>
+                <div class="modal-body">
+                    <p id="confirmMessage">Are you sure you want to proceed?</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="confirmCancel" class="btn btn-outline">Cancel</button>
+                    <button id="confirmOk" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/mortality.js"></script>
+    <script src="../js/utils.js"></script>
+</body>
+</html> 

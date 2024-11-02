@@ -1,0 +1,529 @@
+/* Fowl Management Specific Styles */
+.content-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Filters Section */
+.filters-section {
+    background: white;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+}
+
+.filter-options {
+    display: flex;
+    gap: 1rem;
+}
+
+.filter-options select {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    min-width: 150px;
+}
+
+/* Fowl List */
+.fowl-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.fowl-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.fowl-card:hover {
+    transform: translateY(-2px);
+}
+
+.fowl-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.fowl-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.fowl-category {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.category-layer { background: #e3f2fd; color: #1976d2; }
+.category-broiler { background: #f3e5f5; color: #7b1fa2; }
+.category-breeder { background: #e8f5e9; color: #388e3c; }
+
+.fowl-details {
+    margin-bottom: 1rem;
+}
+
+.fowl-detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.fowl-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Form Styles */
+.modal form {
+    padding: 1.5rem;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .filters-section {
+        flex-direction: column;
+    }
+
+    .filter-options {
+        flex-direction: column;
+    }
+
+    .fowl-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Update/Add these styles in fowl.css */
+
+/* Modal Form Styles */
+.modal form {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* Button Styles Update */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Header Button Specific */
+.header-right .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+/* Textarea specific */
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Select specific */
+.form-group select {
+    background-color: white;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem;
+}
+
+/* Modal Header Update */
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.modal-header h2 {
+    font-size: 1.25rem;
+    color: var(--text-color);
+}
+
+/* Close button update */
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--error-color);
+}
+
+/* Print Styles */
+@media print {
+    /* Reset page margins and size */
+    @page {
+        size: auto;
+        margin: 15mm;
+    }
+
+    /* Basic reset for print */
+    body, .content-container, .print-content {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    /* Print header styles */
+    .print-header {
+        text-align: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #333;
+    }
+
+    .print-header h1 {
+        font-size: 18pt !important;
+        margin: 0 0 10px 0 !important;
+    }
+
+    .company-info p {
+        font-size: 10pt !important;
+        margin: 3px 0 !important;
+    }
+
+    /* Record info section */
+    .record-info {
+        margin: 15px 0 !important;
+        padding: 8px !important;
+        border: 1px solid #ddd;
+        font-size: 10pt !important;
+    }
+
+    /* Table styles */
+    .fowl-records-table {
+        margin: 15px 0 !important;
+        width: 100% !important;
+        overflow-x: visible !important;
+    }
+
+    .fowl-records-table table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 9pt !important;
+        table-layout: fixed !important;
+    }
+
+    .fowl-records-table th,
+    .fowl-records-table td {
+        padding: 6px !important;
+        border: 1px solid #333 !important;
+        text-align: left !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    .fowl-records-table th {
+        background-color: #f5f5f5 !important;
+        font-weight: bold !important;
+        white-space: normal !important;
+    }
+
+    /* Column widths */
+    .fowl-records-table th:nth-child(1), /* Batch ID */
+    .fowl-records-table td:nth-child(1) {
+        width: 15% !important;
+    }
+    
+    .fowl-records-table th:nth-child(2), /* Category */
+    .fowl-records-table td:nth-child(2) {
+        width: 15% !important;
+    }
+    
+    .fowl-records-table th:nth-child(3), /* Quantity */
+    .fowl-records-table td:nth-child(3) {
+        width: 10% !important;
+    }
+    
+    .fowl-records-table th:nth-child(4), /* Date Acquired */
+    .fowl-records-table td:nth-child(4) {
+        width: 15% !important;
+    }
+    
+    .fowl-records-table th:nth-child(5), /* Age */
+    .fowl-records-table td:nth-child(5) {
+        width: 15% !important;
+    }
+    
+    .fowl-records-table th:nth-child(6), /* Notes */
+    .fowl-records-table td:nth-child(6) {
+        width: 30% !important;
+    }
+
+    /* Footer styles */
+    .print-footer {
+        position: fixed !important;
+        bottom: 15mm !important;
+        left: 0 !important;
+        right: 0 !important;
+        text-align: center !important;
+        font-size: 9pt !important;
+        padding-top: 10px !important;
+        border-top: 1px solid #333 !important;
+    }
+
+    .print-footer p {
+        margin: 3px 0 !important;
+    }
+
+    /* Hide non-printable elements */
+    .sidebar,
+    .top-header,
+    .filters-section,
+    .fowl-actions,
+    .modal,
+    .btn {
+        display: none !important;
+    }
+
+    /* Ensure proper page breaks */
+    .fowl-records-table tr {
+        page-break-inside: avoid !important;
+    }
+
+    .fowl-records-table thead {
+        display: table-header-group !important;
+    }
+
+    /* Force black text and remove effects */
+    * {
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+/* Ensure print preview is consistent */
+@media screen and (max-width: 480px) {
+    .print-content {
+        font-size: 12pt !important;
+    }
+
+    .fowl-records-table {
+        overflow-x: auto !important;
+    }
+}
+
+/* Regular styles for the action buttons */
+.fowl-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.action-btn:hover {
+    color: var(--primary-color);
+}
+
+/* Button spacing in header */
+.header-right {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.header-right .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    min-width: auto;
+    padding: 0.75rem 1.25rem;
+}
+
+/* Mobile Responsive Button Styles */
+@media (max-width: 768px) {
+    .header-right {
+        gap: 0.5rem;
+    }
+
+    .header-right .btn {
+        padding: 0.75rem;
+    }
+
+    .header-right .btn .btn-text {
+        display: none;
+    }
+
+    .header-right .btn .icon {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+}
+
+/* Ensure buttons remain clickable on touch devices */
+@media (hover: none) {
+    .header-right .btn {
+        min-height: 44px; /* Minimum touch target size */
+    }
+} 

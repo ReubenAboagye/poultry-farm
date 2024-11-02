@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fowl Management - Poultry Farm</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/fowl.css">
+</head>
+<body class="dashboard-page">
+    <!-- Updated Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Poultry Farm</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="dashboard.html">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="fowl.html">
+                    <span class="icon">🐔</span>
+                    Fowl Management
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="sales.html">
+                    <span class="icon">💰</span>
+                    Egg Sales
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="mortality.html">
+                    <span class="icon">📋</span>
+                    Mortality Tracking
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="reports.html">
+                    <span class="icon">📈</span>
+                    Reports
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="btn btn-outline">
+                <span class="icon">🚪</span>
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <button id="menuToggle" class="menu-toggle">☰</button>
+                <h1>Fowl Management</h1>
+            </div>
+            <div class="header-right">
+                <button id="printAllBtn" class="btn btn-outline">
+                    <span class="icon">🖨️</span>
+                    <span class="btn-text">Print Records</span>
+                </button>
+                <button id="addFowlBtn" class="btn btn-primary">
+                    <span class="icon">➕</span>
+                    <span class="btn-text">Add Batch</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="content-container">
+            <!-- Filters and Search -->
+            <div class="filters-section">
+                <div class="search-box">
+                    <input type="text" id="searchFowl" placeholder="Search fowls...">
+                </div>
+                <div class="filter-options">
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="layer">Layer</option>
+                        <option value="broiler">Broiler</option>
+                        <option value="breeder">Breeder</option>
+                    </select>
+                    <select id="ageFilter">
+                        <option value="">All Ages</option>
+                        <option value="0-12">0-12 weeks</option>
+                        <option value="13-24">13-24 weeks</option>
+                        <option value="25+">25+ weeks</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Fowl List -->
+            <div class="fowl-list" id="fowlList">
+                <!-- Fowl cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Add/Edit Fowl Modal -->
+        <div id="fowlModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Add New Fowl</h2>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <form id="fowlForm">
+                    <div class="form-group">
+                        <label for="batchId">Batch ID</label>
+                        <input type="text" id="batchId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="layer">Layer</option>
+                            <option value="broiler">Broiler</option>
+                            <option value="breeder">Breeder</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateAcquired">Date Acquired</label>
+                        <input type="date" id="dateAcquired" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea id="notes" rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Fowl</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Custom Confirmation Dialog -->
+    <div id="confirmDialog" class="modal confirmation-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirmTitle">Confirm Action</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmCancel" class="btn btn-outline">Cancel</button>
+                <button id="confirmOk" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/fowl.js"></script>
+    <script src="../js/utils.js"></script>
+</body>
+</html> 
