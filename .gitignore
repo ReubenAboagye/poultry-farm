@@ -1,7 +1,8 @@
 # Environment files
 .env
-.env.*
-!.env.example
+.env.production
+.env.local
+.env.backup
 
 # Dependencies
 /vendor/
@@ -17,6 +18,8 @@
 *.log
 *.sqlite
 *.sqlite3
+*.sql
+!database/schema.sql
 
 # Temporary files
 *.swp
@@ -25,8 +28,36 @@
 Thumbs.db
 
 # Uploaded files
-/public/uploads/
-/public/reports/
+/public/uploads/*
+!/public/uploads/.gitkeep
+/public/reports/*
+!/public/reports/.gitkeep
 
 # Cache files
-*.cache 
+*.cache
+
+# Configuration backups
+*.bak
+*copy*
+*backup*
+
+# Test files
+/tests/coverage/
+phpunit.xml
+
+# Security files
+*.pem
+*.key
+*.crt
+*.csr
+*.cer
+
+# Database
+*.sql
+!database/schema.sql
+
+# Credentials
+*.key
+*.pem
+*.crt
+*.p12 

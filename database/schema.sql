@@ -1,17 +1,15 @@
--- Create database if not exists
+-- Keep only structure, remove any test data
 CREATE DATABASE IF NOT EXISTS poultry_farm;
 USE poultry_farm;
 
--- Users table
+-- Users table structure only
 CREATE TABLE IF NOT EXISTS users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    phone VARCHAR(20) UNIQUE,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role ENUM('admin', 'manager', 'staff') NOT NULL DEFAULT 'staff',
-    is_active BOOLEAN DEFAULT TRUE,
-    email_verified_at TIMESTAMP NULL,
+    is_active TINYINT(1) NOT NULL DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -162,9 +160,4 @@ CREATE TABLE IF NOT EXISTS notification_preferences (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
     UNIQUE KEY unique_user_notification (user_id, notification_type)
-);
-
--- Create default admin user (password: admin123)
-INSERT INTO users (username, email, password, role) 
-VALUES ('admin', 'admin@poultryfarm.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin')
-ON DUPLICATE KEY UPDATE id=id; 
+); 
