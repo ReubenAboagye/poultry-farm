@@ -3,22 +3,17 @@ class Database {
     private static $instance = null;
     private $connection;
 
-    private $host = 'localhost';
-    private $username = 'root';
-    private $password = '';
-    private $database = 'poultry_farm';
-
     private function __construct() {
         try {
             $this->connection = new PDO(
-                "mysql:host={$this->host};dbname={$this->database}",
-                $this->username,
-                $this->password,
+                "mysql:host=" . getenv('DB_HOST') . ";dbname=" . getenv('DB_NAME'),
+                getenv('DB_USER'),
+                getenv('DB_PASS'),
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
             );
         } catch(PDOException $e) {
             error_log("Database connection failed: " . $e->getMessage());
-            die("Connection failed: " . $e->getMessage());
+            die("Connection failed. Please check your configuration.");
         }
     }
 
